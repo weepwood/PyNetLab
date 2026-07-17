@@ -9,13 +9,13 @@ permissions:
 
 jobs:
   expand-project:
-    if: ${{ hashFiles('.bootstrap/pynetlab.part-*') != '' }}
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Expand project archive
+        if: ${{ hashFiles('.bootstrap/pynetlab.part-003') != '' }}
         shell: bash
         run: |
           set -Eeuo pipefail

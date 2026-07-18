@@ -1,0 +1,10 @@
+#!/usr/bin/env bpftrace
+tracepoint:tcp:tcp_retransmit_skb
+{
+  @[comm] = count();
+}
+interval:s:5
+{
+  print(@);
+  clear(@);
+}

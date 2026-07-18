@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pynetlab"
+version = "0.2.0"
+description = "Linux network internals laboratory using Python, C and shell."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "weepwood" }]
+keywords = ["linux", "networking", "socket", "epoll", "tcp", "udp", "ebpf", "tun"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: C",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: System :: Networking",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["ruff>=0.12", "mypy>=1.16"]
+
+[project.scripts]
+pynetlab-diagnose = "pynetlab.tools.diagnose:main"
+pynetlab-sniff = "pynetlab.raw.sniffer:main"
+pynetlab-raw-ping = "pynetlab.raw.ping:main"
+pynetlab-tun-icmp = "pynetlab.tun.icmp_responder:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["pynetlab"]
